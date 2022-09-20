@@ -12,27 +12,25 @@ import { useInject } from '@/hooks/inject';
 import { DIVINATION_TYPES } from '@/common/constants';
 
 
-const InputArea = useInject(['divination'])((props) => {
+const InputArea = useInject(['divination'])((props: any) => {
   const { divination } = props;
-  const { dongYao } = divination
-  const [n1, setN1] = useState(1);
-  const [n2, setN2] = useState(2);
-  const [type, setType] = useState<string>(DIVINATION_TYPES.NUMBERS);
+  const { dongyao, n1, n2, type } = divination
 
   const handleChange = useCallback((e: SelectChangeEvent) => {
     const value = e.target.value;
-    setType(value);
+    divination.clear();
+    divination.setType(value);
   }, [])
 
-  const handleChangeNumber = useCallback((v: string, fn: Function) => {
+  const handleChangeNumber = useCallback((v: string, fn: string) => {
     if (v === '' || v.trim().match(/^[1-8]$/)) {
       // @ts-ignore
-      fn(Number(v || 0))
+      divination[fn](Number(v || 0))
     }
   }, [])
 
   const handleSubmit = function () {
-    divination.submit({ n1, n2, type });
+    divination.submit();
   }
 
   return <div className='input-area'>
@@ -51,7 +49,7 @@ const InputArea = useInject(['divination'])((props) => {
         <FormControl sx={{ m: 1, width: '100%' }}>
           <TextField id="number1" label="第一个数字" placeholder="1-8的一个数字" type="number"
             value={n1 || ''}
-            onChange={e => handleChangeNumber(e.target.value, setN1)}
+            onChange={e => handleChangeNumber(e.target.value, 'setN1')}
             InputProps={{
               inputMode: 'numeric',
               inputProps: { min: "0", max: "10", step: "1" }
@@ -60,7 +58,7 @@ const InputArea = useInject(['divination'])((props) => {
         <FormControl sx={{ m: 1, width: '100%' }}>
           <TextField id="number2" label="第二个数字" placeholder="1-8的一个数字" type="number"
             value={n2 || ''}
-            onChange={e => handleChangeNumber(e.target.value, setN2)}
+            onChange={e => handleChangeNumber(e.target.value, 'setN2')}
             InputProps={{
               inputMode: 'numeric',
               inputProps: { min: "0", max: "10", step: "1" }
@@ -70,7 +68,7 @@ const InputArea = useInject(['divination'])((props) => {
       null
     }
     <FormControl sx={{ m: 1, width: '100%' }}>
-      <TextField id="number-result" label="动爻" type="number" value={dongYao}
+      <TextField id="number-result" label="动爻" type="number" value={dongyao}
         InputProps={{
           readOnly: true,
         }} variant="standard" />

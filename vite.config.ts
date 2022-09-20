@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from "path";
 import postcsspxtoviewport from 'postcss-px-to-viewport-8-plugin'
+import postcssNext from 'postcss-cssnext';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -28,6 +29,9 @@ export default defineConfig({
           // exclude: [/node_modules/], // 设置忽略文件，用正则做目录名匹配
           exclude: [],
           landscape: false // 是否处理横屏情况
+        }),
+        postcssNext({
+          browsers: ['Android >= 6.0', 'iOS >= 10']
         })
       ]
     }

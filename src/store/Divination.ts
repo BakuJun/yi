@@ -1,6 +1,6 @@
 
 import { DIVINATION_TYPES, GUA_8, SHI_CHEN } from '@/common/constants';
-import { action, observable, makeAutoObservable } from 'mobx';
+import { action, observable, makeAutoObservable , computed} from 'mobx';
 import Message from '@/components/Message';
 import { getJX } from '@/common/utils';
 
@@ -38,7 +38,7 @@ class Divination {
     const { type, n1, n2 } = this;
     if (this.type === DIVINATION_TYPES.NUMBERS) {
       if (!n1 || !n2) {
-        Message.error('请输入正确的数字.')
+        Message.error('请输入正确的正数.')
         return
       }
       this.computeYuanGua();
@@ -63,12 +63,12 @@ class Divination {
     let shang, xia;
 
     if (this.type === DIVINATION_TYPES.NUMBERS) {
-      if (!this.n1 || !this.n2) {
+      if (!this.cn1 || !this.cn2) {
         return
       }
 
-      shang = this.get3YaoGua(this.n1);
-      xia = this.get3YaoGua(this.n2)
+      shang = this.get3YaoGua(this.cn1);
+      xia = this.get3YaoGua(this.cn2)
     } else {
 
     }
@@ -100,15 +100,25 @@ class Divination {
     this.dongyao = dongyao;
   }
 
+  @computed
+  get cn1(){
+    return (this.n1 % 8) || 8;
+  }
+
+  @computed
+  get cn2(){
+    return (this.n2 % 8) || 8;
+  }
+
   private getNumBianGua() {
     if (!this.n1 || !this.n2) {
       return
     }
 
-    const shang = this.get3YaoGua(this.n1, true)
-    const xia = this.get3YaoGua(this.n2, true)
+    const shang = this.get3YaoGua(this.cn1, true)
+    const xia = this.get3YaoGua(this.cn2, true)
     const shiChen = this.getShiChen();
-    const bianIndex = ((this.n1 + this.n2 + shiChen?.value) % 6) || 6;
+    const bianIndex = ((this.n1 + this.cn2 + shiChen?.value) % 6) || 6;
     const yao6 = shang.img.concat(xia.img)
     this.setDongYao(`${bianIndex}`)
     yao6[6 - bianIndex] = !(yao6[6 - bianIndex])

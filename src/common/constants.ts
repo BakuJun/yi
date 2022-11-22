@@ -35,7 +35,7 @@ export const RESULTS = new Map(Object.entries({
   BU_DING: {
     title: '不定',
     desc: '体用和诸事吉',
-    mean: '人和环境相处融合。大多情况下是吉，但是也有返例。',
+    mean: '人和环境相处融合。大多情况下是吉，但是也有反例。',
     value: 0,
     color: '#CD950C'
   }

@@ -40,6 +40,7 @@ const InputArea = useInject(['divination'])((props: any) => {
       <Select
         value={type}
         onChange={handleChange}
+        disabled
       >
         <MenuItem key={1} value={DIVINATION_TYPES.YMDH}>年月日时</MenuItem>
         <MenuItem key={2} value={DIVINATION_TYPES.NUMBERS}>输入2个数字(有先后)</MenuItem>

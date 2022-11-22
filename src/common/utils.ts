@@ -1,6 +1,10 @@
 import { RESULTS } from "./constants";
 
-export function getJX(ti: I8GuaItem, yong: I8GuaItem) {
+export function getJX(ti?: I8GuaItem, yong?: I8GuaItem) {
+  if (!ti ||!yong) {
+    return;
+  }
+
   if (yong.birth === ti.nature) {
     return RESULTS.get('DA_JI')
   } else if (ti.win === yong.nature) {

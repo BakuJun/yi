@@ -5,7 +5,7 @@ import Message from '@/components/Message';
 import { getJX } from '@/common/utils';
 
 class Divination {
-  @observable type: string = '';
+  @observable type: string = DIVINATION_TYPES.NUMBERS;
   @observable n1: number = 0;
   @observable n2: number = 0;
   @observable dongyao: string = '';
@@ -74,6 +74,7 @@ class Divination {
     }
 
     if (shang && xia) {
+      // @ts-ignore
       this.yuanGua = {
         shang,
         xia,
@@ -85,6 +86,7 @@ class Divination {
   @action
   computeBianGua() {
     if (this.type === DIVINATION_TYPES.NUMBERS) {
+      // @ts-ignore
       this.bianGua = this.getNumBianGua();
     } else {
 
@@ -112,12 +114,13 @@ class Divination {
 
   private getNumBianGua() {
     if (!this.n1 || !this.n2) {
-      return
+      return null;
     }
 
     const shang = this.get3YaoGua(this.cn1, true)
     const xia = this.get3YaoGua(this.cn2, true)
     const shiChen = this.getShiChen();
+    // @ts-ignore
     const bianIndex = ((this.n1 + this.cn2 + shiChen?.value) % 6) || 6;
     const yao6 = shang.img.concat(xia.img)
     this.setDongYao(`${bianIndex}`)

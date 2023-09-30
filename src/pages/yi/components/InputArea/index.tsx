@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 
 import { useInject } from '@/hooks/inject';
 
-import { DIVINATION_TYPES } from '@/common/constants';
+import { DIVINATION_TYPES } from '@/pages/yi/common/constants';
 
 
 const InputArea = useInject(['divination'])((props: any) => {

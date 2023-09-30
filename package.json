@@ -12,6 +12,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.5",
+    "lunar-typescript": "^1.6.10",
     "mobx": "^6.6.2",
     "mobx-react": "^7.5.3",
     "postcss-cssnext": "^3.1.1",

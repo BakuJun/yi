@@ -6,7 +6,10 @@ import store from '@/store'
 function Yi() {
   return (
     <>
-      <InputArea divination={store.divination} />
+      {
+        // @ts-ignore 
+        <InputArea divination={store.divination} />
+      }
       <h1 />
       <ResultArea />
     </>

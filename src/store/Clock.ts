@@ -1,5 +1,5 @@
 
-import { DIVINATION_TYPES, GUA_8, SHI_CHEN } from '@/common/constants';
+import { SHI_CHEN } from '@/common/constants';
 import { getSolarTerm } from '@/common/utils';
 import { action, observable, makeAutoObservable } from 'mobx';
 
@@ -15,7 +15,7 @@ class Clock {
   radius: number;
 
   @observable time: string = '';
-  @observable currentShichen: string = '';
+  @observable currentShichen: any;
 
   constructor() {
     makeAutoObservable(this);
@@ -183,7 +183,7 @@ class Clock {
 
   @action
   initSolarTerms() {
-    this.solarTerms = getSolarTerm(new Date());
+    this.solarTerms = getSolarTerm();
   }
 
 }

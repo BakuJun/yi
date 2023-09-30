@@ -1,0 +1,16 @@
+.yao-wrap {
+  width: 140px;
+  height: 20px;
+  background-color: #333;
+  margin-top: 5px;
+  position: relative;
+}
+
+.yin {
+  background-color: #fff;
+  position: absolute;
+  width: 20px;
+  height: 32px;
+  top: -1px;
+  left: 60px;
+}

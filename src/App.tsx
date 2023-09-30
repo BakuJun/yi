@@ -1,28 +1,22 @@
-import { useState } from 'react'
+import { lazy } from 'react'
 import './App.css'
 import {
   Routes,
   Route,
   Outlet,
-  Link,
-  useMatch,
-  useResolvedPath,
 } from "react-router-dom"
-import Yi from '@/pages/yi';
-import Clock from '@/pages/clock';
+
+
+const Yi = lazy(() => import('@/pages/yi'))
+const Clock = lazy(() => import('@/pages/clock'))
 
 
 function App() {
   return (
-    // <div className="App">
-    //   <InputArea divination={store.divination} />
-    //   <h1 />
-    //   <ResultArea />
-    // </div>
     <Routes>
       <Route path="/" element={<Outlet />}>
-        <Route index element={< Yi/>} />
-        <Route path="clock" element={<Clock />} />
+        <Route index element={<Clock />} />
+        <Route path="yi" element={<Yi />} />
       </Route>
     </Routes>
   )

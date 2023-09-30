@@ -1,5 +1,5 @@
-import './index.css';
-import React, { useCallback, useState } from 'react';
+import './index.scoped.css';
+import React, { useCallback, useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -33,12 +33,17 @@ const InputArea = useInject(['divination'])((props: any) => {
     divination.submit();
   }
 
+  useEffect(() => {
+    divination.setType(DIVINATION_TYPES.NUMBERS);
+  }, [])
+
   return <div className='input-area'>
     <FormControl variant="standard" sx={{ m: 1, width: '100%' }}>
       <InputLabel id="demo-multiple-name-label">占卦类型</InputLabel>
       <Select
         value={type}
         onChange={handleChange}
+        disabled
       >
         <MenuItem key={1} value={DIVINATION_TYPES.YMDH}>年月日时</MenuItem>
         <MenuItem key={2} value={DIVINATION_TYPES.NUMBERS}>输入2个数字(有先后)</MenuItem>

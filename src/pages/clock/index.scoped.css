@@ -1,0 +1,12 @@
+.clock-wrap {
+  width: 100vw;
+  height: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock{
+  width: 350px;
+  height: 350px;
+}

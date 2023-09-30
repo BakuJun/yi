@@ -1,3 +1,5 @@
+import { SHI_CHEN_ORIGIN_DATA } from "./data";
+
 export enum DIVINATION_TYPES {
   YMDH = 'YMDH', // 年月日
   NUMBERS = 'NUMBERS' //数字
@@ -164,65 +166,4 @@ export const GUA_8 = new Map(Object.entries({
   }
 }))
 
-export const SHI_CHEN = new Map(Object.entries({
-  "子": {
-    "name": "子",
-    "times": [23, 0],
-    "value": 1
-  },
-  "丑": {
-    "name": "丑",
-    "times": [1, 2],
-    "value": 2
-  },
-  "寅": {
-    "name": "寅",
-    "times": [3, 4],
-    "value": 3
-  },
-  "卯": {
-    "name": "卯",
-    "times": [5, 6],
-    "value": 4
-  },
-  "辰": {
-    "name": "辰",
-    "times": [7, 8],
-    "value": 5
-  },
-  "巳": {
-    "name": "巳",
-    "times": [9, 10],
-    "value": 6
-  },
-  "午": {
-    "name": "午",
-    "times": [11, 12],
-    "value": 7
-  },
-  "未": {
-    "name": "未",
-    "times": [13, 14],
-    "value": 8
-  },
-  "申": {
-    "name": "申",
-    "times": [15, 16],
-    "value": 9
-  },
-  "酉": {
-    "name": "酉",
-    "times": [17, 18],
-    "value": 10
-  },
-  "戌": {
-    "name": "戌",
-    "times": [19, 20],
-    "value": 11
-  },
-  "亥": {
-    "name": "亥",
-    "times": [21, 22],
-    "value": 12
-  }
-}))
+export const SHI_CHEN = new Map(Object.entries(SHI_CHEN_ORIGIN_DATA))

@@ -1,5 +1,5 @@
 
-import { DIVINATION_TYPES, GUA_8, SHI_CHEN } from '@/pages/yi/common/constants';
+import { DIVINATION_TYPES, GUA_8, SHI_CHEN } from '@/common/constants';
 import { action, observable, makeAutoObservable } from 'mobx';
 import Message from '@/pages/yi/components/Message';
 import { getJX } from '@/pages/yi/common/utils';

@@ -1,4 +1,4 @@
-import { RESULTS } from "./constants";
+import { RESULTS } from "../../../common/constants";
 
 export function getJX(ti: I8GuaItem, yong: I8GuaItem) {
   if (yong.birth === ti.nature) {

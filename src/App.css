@@ -17,4 +17,7 @@ h1{
 
 .App{
   padding-bottom: 40px;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100%;
 }

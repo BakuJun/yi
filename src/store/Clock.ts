@@ -86,7 +86,7 @@ class Clock {
       const x = centerX + (radius - 32) * Math.cos(angle - Math.PI / 2);
       const y = centerY + (radius - 32) * Math.sin(angle - Math.PI / 2);
       context.font = '36px Arial';
-      context.fillStyle = '#5C82C1'; // Sky Blue
+      context.fillStyle = 'black'; // Sky Blue
       context.textAlign = 'center';
       context.textBaseline = 'middle';
       context.fillText(earthlyBranches[i].name, x, y);
@@ -106,7 +106,7 @@ class Clock {
       centerY,
       (2 * Math.PI * (hours + minutes / 60)) / 24,
       radius * 0.5,
-      'blue',
+      'black',
       8
     );
 
@@ -115,7 +115,7 @@ class Clock {
       centerY,
       (2 * Math.PI * (minutes + seconds / 60)) / 60,
       radius * 0.7,
-      'green',
+      'black',
       6
     );
 
@@ -124,7 +124,7 @@ class Clock {
       centerY,
       (2 * Math.PI * seconds) / 60,
       radius * 0.8,
-      'red',
+      'black',
       2
     );
   }
@@ -179,6 +179,7 @@ class Clock {
 
   destoryClock() {
     clearInterval(this.interval);
+    this.canvas = null;
   }
 
   @action

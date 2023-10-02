@@ -1,12 +1,36 @@
+.page-wrap {
+  height: 100vh;
+  width: 100vw;
+}
+
+.bg-img {
+  width: 375px;
+  height: 667px;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
 .clock-wrap {
   width: 100vw;
   height: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-top: 98px;
 }
 
-.clock{
+.clock-detail {
+  position: relative;
+  z-index: 1;
+  margin-top: 200px;
+}
+
+.clock {
   width: 350px;
   height: 350px;
 }

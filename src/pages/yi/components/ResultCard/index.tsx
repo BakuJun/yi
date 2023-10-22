@@ -26,7 +26,7 @@ const ResultCard = (props: P) => {
           上卦({shang.name},{shang.nature})
         </div>
         <div className='img'>
-          {shang.img.map((v, i) =>
+          {shang.img.map((v: any, i: number) =>
             <Yao status={v} key={i} />
           )}
         </div>
@@ -39,7 +39,7 @@ const ResultCard = (props: P) => {
           下卦({xia.name},{xia.nature})
         </div>
         <div className='img'>
-          {xia.img.map((v, i) =>
+          {xia.img.map((v:any, i:number) =>
             <Yao status={v} key={i} />
           )}
         </div>
@@ -49,7 +49,7 @@ const ResultCard = (props: P) => {
       </div>
     </div>
     <div className='result-jx-wrap'>
-      <div className='jx-title' style={{color: jx.color }}>
+      <div className='jx-title' style={{ color: jx.color }}>
         {subtitle}: {jx.title}({jx.desc})
       </div>
       <div>

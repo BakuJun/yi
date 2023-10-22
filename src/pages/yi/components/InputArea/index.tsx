@@ -23,7 +23,8 @@ const InputArea = useInject(['divination'])((props: any) => {
   }, [])
 
   const handleChangeNumber = useCallback((v: string, fn: string) => {
-    if (v === '' || v.trim().match(/^[1-8]$/)) {
+    let num = Number(v)
+    if (v === '' || num && num > 0) {
       // @ts-ignore
       divination[fn](Number(v || 0))
     }

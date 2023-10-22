@@ -39,5 +39,25 @@ export default defineConfig({
         })
       ]
     }
-  }
+  },
+  build: {
+    rollupOptions: {
+      // 配置要打包到 vendor.js 的库
+      output: {
+        manualChunks: {
+          vendor: [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            '@emotion/react',
+            '@mui/material',
+            '@mui/icons-material',
+            'dayjs',
+            'mobx',
+            'mobx-react'
+          ],
+        },
+      },
+    },
+  },
 })

@@ -4,6 +4,7 @@ import { JIE_QI_LIST } from '@/common/data';
 import { getLunar } from '@/common/utils';
 import { Lunar } from 'lunar-typescript';
 import { action, observable, makeAutoObservable, computed } from 'mobx';
+import dayjs from 'dayjs';
 
 const earthlyBranches = Array.from(SHI_CHEN.values())
 
@@ -174,13 +175,25 @@ class Clock {
 
   @computed
   jieqi() {
-    return (this.lunar.getCurrentJieQi() || this.lunar.getPrevJieQi()).getName();
+    return this.lunar.getCurrentJieQi() || this.lunar.getPrevJieQi();
   }
 
   @computed
-  jieqiObj(){
+  jieqiObj() {
     const jq = this.jieqi();
-    return JIE_QI_LIST[jq];
+    const jqObj = JIE_QI_LIST[jq.getName()];
+    const start = jq.getSolar()
+
+    // 节气是精确到时分秒的
+    jqObj.start = `${start.getYear()}-${start.getMonth()}-${start.getDay()} ${start.getHour()}:${start.getMinute()}:${start.getSecond()}`
+    const end = this.lunar.getNextJieQi().getSolar();
+    jqObj.end = `${end.getYear()}-${end.getMonth()}-${end.getDay()} ${end.getHour()}:${end.getMinute()}:${end.getSecond() - 1}`
+
+    jqObj.startDate = `${start.getMonth()}.${start.getDay()}`;
+    const endDate = dayjs(jqObj.end).subtract(1, 'day');
+    jqObj.endDate = `${endDate.month() + 1}.${endDate.date()}`
+
+    return jqObj;
   }
 
   runClock() {

@@ -3,6 +3,7 @@
   width: 100vw;
   overflow: hidden;
   flex-direction: column;
+  position: relative;
 }
 
 .bg-img {
@@ -71,6 +72,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #333;
+  }
+
+  & a {
+    text-decoration: underline;
   }
 
   &:last-child {

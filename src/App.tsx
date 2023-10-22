@@ -22,7 +22,7 @@ function App() {
       }>
         <Route index element={<Clock />} />
         <Route path="/jingluo/:pName" element={<JingLuo />} />
-        <Route path="yi" element={<Yi />} />
+        <Route path="/yi" element={<Yi />} />
       </Route>
     </Routes>
   )

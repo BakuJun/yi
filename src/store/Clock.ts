@@ -1,7 +1,9 @@
 
 import { SHI_CHEN } from '@/common/constants';
-import { getSolarTerm } from '@/common/utils';
-import { action, observable, makeAutoObservable } from 'mobx';
+import { JIE_QI_LIST } from '@/common/data';
+import { getLunar } from '@/common/utils';
+import { Lunar } from 'lunar-typescript';
+import { action, observable, makeAutoObservable, computed } from 'mobx';
 
 const earthlyBranches = Array.from(SHI_CHEN.values())
 
@@ -9,17 +11,17 @@ class Clock {
   canvas: any;
   context: any;
   interval: any;
-  solarTerms: any;
   centerX: number;
   centerY: number;
   radius: number;
+  lunar: Lunar
 
   @observable time: string = '';
   @observable currentShichen: any;
 
   constructor() {
     makeAutoObservable(this);
-    this.initSolarTerms();
+    this.lunar = getLunar();
   }
 
   drawClock(canvas?: any) {
@@ -60,7 +62,7 @@ class Clock {
       const y2 = centerY + (radius + 30) * Math.sin(angle - Math.PI / 2);
 
       context.font = '28px Arial';
-      context.fillStyle = '#5C82C1';
+      context.fillStyle = '#666';
       context.textAlign = 'center';
       context.textBaseline = 'middle';
       context.fillText(i.toString(), x2, y2);
@@ -170,6 +172,17 @@ class Clock {
     // document.getElementById('earthlyBranch').textContent = `属${currentEarthlyBranch}时`;
   }
 
+  @computed
+  jieqi() {
+    return (this.lunar.getCurrentJieQi() || this.lunar.getPrevJieQi()).getName();
+  }
+
+  @computed
+  jieqiObj(){
+    const jq = this.jieqi();
+    return JIE_QI_LIST[jq];
+  }
+
   runClock() {
     this.interval = setInterval(() => {
       this.drawClock()
@@ -181,12 +194,6 @@ class Clock {
     clearInterval(this.interval);
     this.canvas = null;
   }
-
-  @action
-  initSolarTerms() {
-    this.solarTerms = getSolarTerm();
-  }
-
 }
 
 export default new Clock();

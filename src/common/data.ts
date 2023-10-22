@@ -132,10 +132,125 @@ export const SHI_CHEN_ORIGIN_DATA = {
   }
 }
 
-
-export const SOLAR_TERMS = [
-  "小寒", "大寒", "立春", "雨水", "惊蛰", "春分",
-  "清明", "谷雨", "立夏", "小满", "芒种", "夏至",
-  "小暑", "大暑", "立秋", "处暑", "白露", "秋分",
-  "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"
-];
+export const JIE_QI_LIST = {
+  "立春": {
+    "name": "立春",
+    "pinyin": "lichun",
+    "img": "https://www.ourfreesky.org/static/jieqi/01_lichun.jpg"
+  },
+  "雨水": {
+    "name": "雨水",
+    "pinyin": "yushui",
+    "img": "https://www.ourfreesky.org/static/jieqi/02_yushui.jpg"
+  },
+  "惊蛰": {
+    "name": "惊蛰",
+    "pinyin": "jingzhe",
+    "img": "https://www.ourfreesky.org/static/jieqi/03_jingzhe.jpg"
+  },
+  "春分": {
+    "name": "春分",
+    "pinyin": "chunfen",
+    "img": "https://www.ourfreesky.org/static/jieqi/04_chunfen.jpg"
+  },
+  "清明": {
+    "name": "清明",
+    "pinyin": "qingming",
+    "img": "https://www.ourfreesky.org/static/jieqi/05_qingming.jpg"
+  },
+  "谷雨": {
+    "name": "谷雨",
+    "pinyin": "guyu",
+    "img": "https://www.ourfreesky.org/static/jieqi/06_guyu.jpg"
+  },
+  "立夏": {
+    "name": "立夏",
+    "pinyin": "lixia",
+    "img": "https://www.ourfreesky.org/static/jieqi/07_lixia.jpg"
+  },
+  "小满": {
+    "name": "小满",
+    "pinyin": "xiaoman",
+    "img": "https://www.ourfreesky.org/static/jieqi/08_xiaoman.jpg"
+  },
+  "芒种": {
+    "name": "芒种",
+    "pinyin": "mangzhong",
+    "img": "https://www.ourfreesky.org/static/jieqi/09_mangzhong.jpg"
+  },
+  "夏至": {
+    "name": "夏至",
+    "pinyin": "xiazhi",
+    "img": "https://www.ourfreesky.org/static/jieqi/10_xiazhi.jpg"
+  },
+  "小暑": {
+    "name": "小暑",
+    "pinyin": "xiaoshu",
+    "img": "https://www.ourfreesky.org/static/jieqi/11_xiaoshu.jpg"
+  },
+  "大暑": {
+    "name": "大暑",
+    "pinyin": "dashu",
+    "img": "https://www.ourfreesky.org/static/jieqi/12_dashu.jpg"
+  },
+  "立秋": {
+    "name": "立秋",
+    "pinyin": "liqiu",
+    "img": "https://www.ourfreesky.org/static/jieqi/13_liqiu.jpg"
+  },
+  "处暑": {
+    "name": "处暑",
+    "pinyin": "chushu",
+    "img": "https://www.ourfreesky.org/static/jieqi/14_chushu.jpg"
+  },
+  "白露": {
+    "name": "白露",
+    "pinyin": "bailu",
+    "img": "https://www.ourfreesky.org/static/jieqi/15_bailu.jpg"
+  },
+  "秋分": {
+    "name": "秋分",
+    "pinyin": "qiufen",
+    "img": "https://www.ourfreesky.org/static/jieqi/16_qiufen.jpg"
+  },
+  "寒露": {
+    "name": "寒露",
+    "pinyin": "hanlu",
+    "img": "https://www.ourfreesky.org/static/jieqi/17_hanlu.jpg"
+  },
+  "霜降": {
+    "name": "霜降",
+    "pinyin": "shuangjiang",
+    "img": "https://www.ourfreesky.org/static/jieqi/18_shuangjiang.jpg"
+  },
+  "立冬": {
+    "name": "立冬",
+    "pinyin": "lidong",
+    "img": "https://www.ourfreesky.org/static/jieqi/19_lidong.jpg"
+  },
+  "小雪": {
+    "name": "小雪",
+    "pinyin": "xiaoxue",
+    "img": "https://www.ourfreesky.org/static/jieqi/20_xiaoxue.jpg"
+  },
+  "大雪": {
+    "name": "大雪",
+    "pinyin": "daxue",
+    "img": "https://www.ourfreesky.org/static/jieqi/21_daxue.jpg"
+  },
+  "冬至": {
+    "name": "冬至",
+    "pinyin": "dongzhi",
+    "img": "https://www.ourfreesky.org/static/jieqi/22_dongzhi.jpg"
+  },
+  "小寒": {
+    "name": "小寒",
+    "pinyin": "xiaohan",
+    "img": "https://www.ourfreesky.org/static/jieqi/23_xiaohan.jpg"
+  },
+  "大寒": {
+    "name": "大寒",
+    "pinyin": "dahan",
+    "img": "https://www.ourfreesky.org/static/jieqi/24_dahan.jpg"
+  }
+}

@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import './index.scoped.css';
+import './index.css';
 import { useInject } from '@/hooks/inject';
 import { Link } from 'react-router-dom';
+import { setPageTitle } from '@/common/utils';
+
+setPageTitle('养生钟')
 
 const Clock = useInject(['clock'])(props => {
   const { clock } = props;
@@ -19,26 +23,32 @@ const Clock = useInject(['clock'])(props => {
     }
   }, []);
 
-  const { currentShichen, solarTerms, time } = clock;
+  const { currentShichen, time } = clock;
 
   return <div className='page-wrap'>
-    <img src='https://app-static-1306115679.file.myqcloud.com/temp_imgs/1.jpg' className='bg-img' />
     <div className='clock-wrap'>
+      <img src={clock.jieqiObj()?.img} className='bg-img' />
       <canvas width={700} height={700} className='clock' id="shi-chen-clock"></canvas>
     </div>
     <div className='clock-detail'>
-      <div>
-        <span>{solarTerms}</span>
-        <span> {currentShichen?.name}时({currentShichen?.times?.[0]}:00 ~ {currentShichen?.times?.[1] + 1}:00)</span>
-        <br />
-        <span> {time} </span>
+      <div className='detail-item'>
+        <label className='flex-center'>时辰</label>
+        <div className='flex-center'> {currentShichen?.name}时({currentShichen?.times?.[0]}:00 ~ {currentShichen?.times?.[1] + 1}:00)</div>
       </div>
-      <div>
-        <span> {currentShichen?.action} </span>
+      <div className='detail-item'>
+        <label className='flex-center'>时间</label>
+        <div className='flex-center'> {time} </div>
       </div>
-      <Link to={`/jingluo/${currentShichen?.jingluo?.pName}`}>
-        {currentShichen?.jingluo?.name}
-      </Link>
+      <div className='detail-item'>
+        <label className='flex-center'>养生小建议</label>
+        <div className='flex-center'> {currentShichen?.action} </div>
+      </div>
+      <div className='detail-item'>
+        <label className='flex-center'>当令经络</label>
+        <Link to={`/jingluo/${currentShichen?.jingluo?.pName}`}>
+          {currentShichen?.jingluo?.name}
+        </Link>
+      </div>
     </div>
   </div>
 })

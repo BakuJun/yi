@@ -1,0 +1,86 @@
+.page-wrap {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.bg-img {
+  width: 375px;
+  height: 392px;
+  z-index: 0;
+  position: absolute;
+  top: 4px;
+  left: 0;
+  opacity: 0.6;
+  transform: scale(1.05, 1.05);
+}
+
+.clock-wrap {
+  width: 100vw;
+  height: 392px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
+  margin-bottom: 30px;
+}
+
+.clock {
+  width: 350px;
+  height: 350px;
+  z-index: 2;
+  position: relative;
+  top: -11px;
+}
+
+.clock-detail {
+  position: relative;
+  width: 350px;
+  margin: 0 auto;
+  z-index: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  & label {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    background-color: rgb(226, 221, 218);
+    border-radius: 4px;
+    padding: 2px 0;
+    color: #666;
+
+    &.flex-center {
+      display: flex;
+    }
+  }
+
+  & label ~ * {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-height: 700px) {
+  .page-wrap {
+    /* 微信跳转后body height会发生变化，底部多了一个bar，所以动态调整高度  */
+    margin-top: -40px;
+  }
+}

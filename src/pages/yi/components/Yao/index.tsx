@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scoped.css';
 
 interface P {
   status: boolean

@@ -1,5 +1,5 @@
-import './index.css';
-import React, { useCallback, useState } from 'react';
+import './index.scoped.css';
+import React, { useCallback, useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -33,6 +33,10 @@ const InputArea = useInject(['divination'])((props: any) => {
   const handleSubmit = function () {
     divination.submit();
   }
+
+  useEffect(() => {
+    divination.setType(DIVINATION_TYPES.NUMBERS);
+  }, [])
 
   return <div className='input-area'>
     <FormControl variant="standard" sx={{ m: 1, width: '100%' }}>

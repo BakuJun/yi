@@ -1,8 +1,9 @@
 
 import { DIVINATION_TYPES, GUA_8, SHI_CHEN } from '@/common/constants';
-import { action, observable, makeAutoObservable , computed} from 'mobx';
-import Message from '@/components/Message';
-import { getJX } from '@/common/utils';
+import { action, observable, makeAutoObservable, computed } from 'mobx';
+import Message from '@/pages/yi/components/Message';
+import { getJX } from '@/pages/yi/common/utils';
+
 
 class Divination {
   @observable type: string = DIVINATION_TYPES.NUMBERS;
@@ -103,12 +104,12 @@ class Divination {
   }
 
   @computed
-  get cn1(){
+  get cn1() {
     return (this.n1 % 8) || 8;
   }
 
   @computed
-  get cn2(){
+  get cn2() {
     return (this.n2 % 8) || 8;
   }
 
@@ -125,7 +126,7 @@ class Divination {
     const yao6 = shang.img.concat(xia.img)
     this.setDongYao(`${bianIndex}`)
     yao6[6 - bianIndex] = !(yao6[6 - bianIndex])
-    
+
     if (bianIndex > 3) {
       let bian = this.get3YaoGuaByImg(yao6.slice(0, 3))
       return {

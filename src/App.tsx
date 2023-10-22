@@ -1,19 +1,30 @@
-import { useState } from 'react'
+import { Suspense, lazy } from 'react'
 import './App.css'
-import InputArea from './components/InputArea'
-import ResultArea from './components/ResultArea'
-import store from './store'
+import {
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom"
+
+
+const Yi = lazy(() => import('@/pages/yi'))
+const Clock = lazy(() => import('@/pages/clock'))
+const JingLuo = lazy(() => import('@/pages/jingluo'))
+
 
 function App() {
   return (
-    <div className="App">
-      {
-        // @ts-ignore
-        <InputArea divination={store.divination} />
-      }
-      <h1 />
-      <ResultArea />
-    </div>
+    <Routes>
+      <Route path="/" element={
+        <Suspense fallback={<></>}>
+          <Outlet />
+        </Suspense>
+      }>
+        <Route index element={<Clock />} />
+        <Route path="/jingluo/:pName" element={<JingLuo />} />
+        <Route path="yi" element={<Yi />} />
+      </Route>
+    </Routes>
   )
 }
 

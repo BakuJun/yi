@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scoped.css';
 import React from 'react';
 import ResultCard from '../ResultCard';
 import { useInject } from '@/hooks/inject';

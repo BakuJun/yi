@@ -1,7 +1,9 @@
 import divination from "./Divination";
+import clock from './Clock';
 
 const store = {
-  divination
+  divination,
+  clock
 }
 
 export default store;

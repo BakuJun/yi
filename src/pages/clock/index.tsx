@@ -25,7 +25,7 @@ const Clock = useInject(['clock'])(props => {
 
   const { currentShichen, time } = clock;
 
-  return <div className='page-wrap'>
+  return <div className='page-wrap flex-center'>
     <div className='clock-wrap'>
       <img src={clock.jieqiObj()?.img} className='bg-img' />
       <canvas width={700} height={700} className='clock' id="shi-chen-clock"></canvas>

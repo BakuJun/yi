@@ -17,6 +17,7 @@ export function getJingLuo(pName) {
     }
   })
 
+  // @ts-ignore
   return shichen && SHI_CHEN_ORIGIN_DATA[shichen] ? SHI_CHEN_ORIGIN_DATA[shichen].jingluo : {};
 }
 

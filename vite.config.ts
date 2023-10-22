@@ -2,14 +2,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from "path";
 import postcsspxtoviewport from 'postcss-px-to-viewport-8-plugin'
-import postcssNext from 'postcss-cssnext';
+import postcssNext from 'postcss-cssnext'
 import { reactScopedCssPlugin } from 'rollup-plugin-react-scoped-css'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    reactScopedCssPlugin()
+    reactScopedCssPlugin(),
   ],
   resolve: {
     alias: {

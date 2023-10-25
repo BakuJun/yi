@@ -18,7 +18,7 @@ class Clock {
 
   constructor() {
     makeAutoObservable(this);
-    jieqi.initLunar();
+    // jieqi.initLunar();
   }
 
   drawClock(canvas?: any) {
@@ -171,7 +171,7 @@ class Clock {
 
   @computed
   jieqi() {
-    return jieqi.getCurrentJieqi();
+    return jieqi.getCurrentJieQi();
   }
 
   @computed

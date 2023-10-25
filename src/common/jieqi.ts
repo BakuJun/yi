@@ -1,5 +1,6 @@
 import { Solar } from 'lunar-typescript';
 import dayjs from 'dayjs';
+import { formatSolarToDayJs, formatSolatToYMDHMS } from './utils';
 
 const jieQiData = [
   {
@@ -460,34 +461,69 @@ const jieQiData = [
   }
 ]
 
+const now = new Date();
+const solar = Solar.fromYmd(now.getFullYear(), now.getMonth() + 1, now.getDate());
+const lunar = solar.getLunar();
+
 export default {
   jieQiData,
-  lunar: null,
-  initLunar(){
-    const d = new Date();
-    const solar = Solar.fromYmd(d.getFullYear(), d.getMonth() + 1, d.getDate());
-    this.lunar = solar.getLunar();
-  },
+  solar,
+  lunar,
+  calcStart: 0,
+  _jqObj: null,
   getJieQiByName(jieqiName) {
     return this.jieQiData.find(item => item.name === jieqiName);
   },
-  getCurrentJieqi() {
-    return this.lunar.getCurrentJieQi() || this.lunar.getPrevJieQi();
+  getCurrentJieQi() {
+    return this.lunar.getCurrentJieQi() || this.lunar.getPrevJieQi()
   },
   getJieCurrentJieQiObj() {
-    const jq = this.getCurrentJieqi();
-    const jqObj = this.getJieQiByName(jq.getName());
-    const start = jq.getSolar()
+    const calcEnd = (new Date()).getTime()
+    //优化计算逻辑,30秒算一次节气就好，不然太过密集了，停留时间长的情况下可能有偏差
+    if (this.calcStart === 0 || (this.calcStart > 0 && calcEnd - this.calcStart > 30000)) {
+      const jq = this.getCurrentJieQi();
+      const jqObj = this.getJieQiByName(jq.getName())
+      const start = jq.getSolar()
 
-    // 节气是精确到时分秒的
-    jqObj.start = `${start.getYear()}-${start.getMonth()}-${start.getDay()} ${start.getHour()}:${start.getMinute()}:${start.getSecond()}`
-    const end = this.lunar.getNextJieQi().getSolar();
-    jqObj.end = `${end.getYear()}-${end.getMonth()}-${end.getDay()} ${end.getHour()}:${end.getMinute()}:${end.getSecond() - 1}`
+      // 节气是精确到时分秒的
+      jqObj.start = formatSolatToYMDHMS(start);
+      const end = this.lunar.getNextJieQi().getSolar();
+      jqObj.end = `${end.getYear()}-${end.getMonth()}-${end.getDay()} ${end.getHour()}:${end.getMinute()}:${end.getSecond() - 1}`
 
-    jqObj.startDate = `${start.getMonth()}.${start.getDay()}`;
-    const endDate = dayjs(jqObj.end).subtract(1, 'day');
-    jqObj.endDate = `${endDate.month() + 1}.${endDate.date()}`
+      jqObj.startDate = `${start.getMonth()}.${start.getDay()}`
+      const endDate = dayjs(jqObj.end).subtract(1, 'day')
+      jqObj.endDate = `${endDate.month() + 1}.${endDate.date()}`
 
-    return jqObj;
+      jqObj.currentHou = this._getCurrentHou(jqObj)
+
+      this._jqObj = jqObj;
+      this.calcStart = calcEnd;
+
+      console.log('not cache')
+
+      return jqObj;
+    } else {
+      console.log('cache')
+      return this._jqObj;
+    }
+  },
+  _getCurrentHou(jqObj) {
+    const currentSolar = this.getCurrentJieQi().getSolar();
+    const nextSolar = this.lunar.getNextJieQi().getSolar();
+    const curSolarDayjs = formatSolarToDayJs(currentSolar);
+    const nextSolarDayjs = formatSolarToDayJs(nextSolar);
+    const ds = nextSolarDayjs.diff(curSolarDayjs, 'seconds');
+    const perHouSeconds = ds / 3; // 通过两节气时差算出三候间间隔
+    const nowDayjs = dayjs(new Date());
+    const currentHouIndex = Math.ceil(nowDayjs.diff(curSolarDayjs, 'seconds') / perHouSeconds);
+
+    const houStartDayjs = curSolarDayjs.add((currentHouIndex - 1) * perHouSeconds, 'seconds');
+    const houEndDayjs = curSolarDayjs.add(currentHouIndex * perHouSeconds, 'seconds');
+
+    jqObj.currentHou = {
+      ...jqObj['sanhou'][currentHouIndex],
+      start: `${houStartDayjs.month() + 1}/${houStartDayjs.date()}`,
+      end: `${houEndDayjs.month() + 1}/${houEndDayjs.date()}`
+    };
   }
 }

@@ -508,7 +508,8 @@ export default {
     const currentSolar = this.getCurrentJieQi().getSolar();
     const nextSolar = this.lunar.getNextJieQi().getSolar();
     const curSolarDayjs = formatSolarToDayJs(currentSolar);
-    const nextSolarDayjs = formatSolarToDayJs(nextSolar);
+    // 计算下一个节气前减1天
+    const nextSolarDayjs = formatSolarToDayJs(nextSolar).subtract(1, 'days');
     const ds = nextSolarDayjs.diff(curSolarDayjs, 'seconds');
     const perHouSeconds = ds / 3; // 通过两节气时差算出三候间间隔
     const nowDayjs = dayjs(new Date());
@@ -520,7 +521,8 @@ export default {
     jqObj.currentHou = {
       ...jqObj['sanhou'][currentHouIndex],
       start: `${houStartDayjs.month() + 1}/${houStartDayjs.date()}`,
-      end: `${houEndDayjs.month() + 1}/${houEndDayjs.date()}`
+      end: `${houEndDayjs.month() + 1}/${houEndDayjs.date()}`,
+      name: currentHouIndex === 1 ? '一候' : (currentHouIndex === 2 ? '二候' : '三候')
     };
   }
 }

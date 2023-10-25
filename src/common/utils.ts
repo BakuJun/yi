@@ -1,12 +1,7 @@
-import { Solar } from 'lunar-typescript';
+
 import { SHI_CHEN_ORIGIN_DATA } from './data';
 import { RESULTS } from "./constants";
 
-export function getLunar() {
-  const d = new Date();
-  const solar = Solar.fromYmd(d.getFullYear(), d.getMonth() + 1, d.getDate());
-  return solar.getLunar();
-}
 
 export function getJingLuo(pName) {
   const shichen = Object.keys(SHI_CHEN_ORIGIN_DATA).filter(sc => {

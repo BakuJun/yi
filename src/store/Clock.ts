@@ -1,10 +1,7 @@
 
 import { SHI_CHEN } from '@/common/constants';
-import { JIE_QI_LIST } from '@/common/data';
-import { getLunar } from '@/common/utils';
-import { Lunar } from 'lunar-typescript';
+import jieqi from '@/common/jieqi';
 import { action, observable, makeAutoObservable, computed } from 'mobx';
-import dayjs from 'dayjs';
 
 const earthlyBranches = Array.from(SHI_CHEN.values())
 
@@ -15,14 +12,13 @@ class Clock {
   centerX: number;
   centerY: number;
   radius: number;
-  lunar: Lunar
 
   @observable time: string = '';
   @observable currentShichen: any;
 
   constructor() {
     makeAutoObservable(this);
-    this.lunar = getLunar();
+    jieqi.initLunar();
   }
 
   drawClock(canvas?: any) {
@@ -62,8 +58,8 @@ class Clock {
       const x2 = centerX + (radius + 30) * Math.cos(angle - Math.PI / 2);
       const y2 = centerY + (radius + 30) * Math.sin(angle - Math.PI / 2);
 
-      context.font = '28px Arial';
-      context.fillStyle = '#666';
+      context.font = 'bold 28px Arial';
+      context.fillStyle = '#333';
       context.textAlign = 'center';
       context.textBaseline = 'middle';
       context.fillText(i.toString(), x2, y2);
@@ -88,7 +84,7 @@ class Clock {
       const angle = (2 * Math.PI * i) / 12;
       const x = centerX + (radius - 32) * Math.cos(angle - Math.PI / 2);
       const y = centerY + (radius - 32) * Math.sin(angle - Math.PI / 2);
-      context.font = '36px Arial';
+      context.font = 'bolder 36px Arial';
       context.fillStyle = 'black'; // Sky Blue
       context.textAlign = 'center';
       context.textBaseline = 'middle';
@@ -166,7 +162,7 @@ class Clock {
     }
 
     this.currentShichen = earthlyBranches[currentEarthlyBranchIndex];
-    this.time = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    this.time = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
     // 更新页面中的时间和地支显示
     // document.getElementById('currentTime').textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
@@ -175,25 +171,12 @@ class Clock {
 
   @computed
   jieqi() {
-    return this.lunar.getCurrentJieQi() || this.lunar.getPrevJieQi();
+    return jieqi.getCurrentJieqi();
   }
 
   @computed
   jieqiObj() {
-    const jq = this.jieqi();
-    const jqObj = JIE_QI_LIST[jq.getName()];
-    const start = jq.getSolar()
-
-    // 节气是精确到时分秒的
-    jqObj.start = `${start.getYear()}-${start.getMonth()}-${start.getDay()} ${start.getHour()}:${start.getMinute()}:${start.getSecond()}`
-    const end = this.lunar.getNextJieQi().getSolar();
-    jqObj.end = `${end.getYear()}-${end.getMonth()}-${end.getDay()} ${end.getHour()}:${end.getMinute()}:${end.getSecond() - 1}`
-
-    jqObj.startDate = `${start.getMonth()}.${start.getDay()}`;
-    const endDate = dayjs(jqObj.end).subtract(1, 'day');
-    jqObj.endDate = `${endDate.month() + 1}.${endDate.date()}`
-
-    return jqObj;
+    return jieqi.getJieCurrentJieQiObj();
   }
 
   runClock() {

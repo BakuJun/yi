@@ -16,9 +16,9 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "value": 2,
     "action": "安心睡觉",
     "jingluo": {
-      "name": "足少阳胆经",
-      "pName": "zsydj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/iy1bto5rmegcbz4e?singleDoc"
+      "name": "足厥阴肝经",
+      "pName": "zjygj",
+      "yuque": "https://www.yuque.com/yishun/umgqgv/uqpaylas78vx3txw?singleDoc"
     }
   },
   "寅": {

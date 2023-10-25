@@ -1,12 +1,9 @@
-import { Solar } from 'lunar-typescript';
+
 import { SHI_CHEN_ORIGIN_DATA } from './data';
 import { RESULTS } from "./constants";
+import { Solar } from 'lunar-typescript';
+import dayjs from 'dayjs';
 
-export function getLunar() {
-  const d = new Date();
-  const solar = Solar.fromYmd(d.getFullYear(), d.getMonth() + 1, d.getDate());
-  return solar.getLunar();
-}
 
 export function getJingLuo(pName) {
   const shichen = Object.keys(SHI_CHEN_ORIGIN_DATA).filter(sc => {
@@ -26,7 +23,7 @@ export function setPageTitle(title: string) {
 }
 
 export function getJX(ti?: I8GuaItem, yong?: I8GuaItem) {
-  if (!ti ||!yong) {
+  if (!ti || !yong) {
     return;
   }
 
@@ -41,4 +38,12 @@ export function getJX(ti?: I8GuaItem, yong?: I8GuaItem) {
   } else if (yong.nature === ti.nature) {
     return RESULTS.get('BU_DING')
   }
+}
+
+export function formatSolatToYMDHMS(solar: Solar): string {
+  return `${solar.getYear()}-${solar.getMonth()}-${solar.getDay()} ${solar.getHour()}:${solar.getMinute()}:${solar.getSecond()}`;
+}
+
+export function formatSolarToDayJs(solar: Solar): dayjs.Dayjs {
+  return dayjs(formatSolatToYMDHMS(solar));
 }

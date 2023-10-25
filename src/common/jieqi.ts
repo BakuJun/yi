@@ -494,20 +494,17 @@ export default {
       const endDate = dayjs(jqObj.end).subtract(1, 'day')
       jqObj.endDate = `${endDate.month() + 1}.${endDate.date()}`
 
-      jqObj.currentHou = this._getCurrentHou(jqObj)
+      this._setCurrentHou(jqObj)
 
       this._jqObj = jqObj;
       this.calcStart = calcEnd;
 
-      console.log('not cache')
-
-      return jqObj;
+      return this._jqObj;
     } else {
-      console.log('cache')
       return this._jqObj;
     }
   },
-  _getCurrentHou(jqObj) {
+  _setCurrentHou(jqObj) {
     const currentSolar = this.getCurrentJieQi().getSolar();
     const nextSolar = this.lunar.getNextJieQi().getSolar();
     const curSolarDayjs = formatSolarToDayJs(currentSolar);

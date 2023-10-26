@@ -5,7 +5,7 @@ import { useInject } from '@/hooks/inject';
 import { Link } from 'react-router-dom';
 import { setPageTitle } from '@/common/utils';
 
-setPageTitle('养生钟')
+setPageTitle('知周养生钟')
 
 const Clock = useInject(['clock'])(props => {
   const { clock } = props;

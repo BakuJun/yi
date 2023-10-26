@@ -176,7 +176,7 @@ class Clock {
 
   @computed
   jieqiObj() {
-    return jieqi.getJieCurrentJieQiObj();
+    return jieqi.getCurrentJieQiObj();
   }
 
   runClock() {

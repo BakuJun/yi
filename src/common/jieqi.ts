@@ -477,7 +477,7 @@ export default {
   getCurrentJieQi() {
     return this.lunar.getCurrentJieQi() || this.lunar.getPrevJieQi()
   },
-  getJieCurrentJieQiObj() {
+  getCurrentJieQiObj() {
     const calcEnd = (new Date()).getTime()
     //优化计算逻辑,30秒算一次节气就好，不然太过密集了，停留时间长的情况下可能有偏差
     if (this.calcStart === 0 || (this.calcStart > 0 && calcEnd - this.calcStart > 30000)) {

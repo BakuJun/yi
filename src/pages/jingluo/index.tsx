@@ -7,6 +7,7 @@ import './index.scoped.css'
 const JingLuo = (props) => {
   const { pName } = useParams();
   const [jingluo, setJingLuo] = useState<any>({});
+  const url = `${jingluo?.yuque}?view=doc_embed&from=zhizhou`;
 
   useEffect(() => {
     const jingluo = getJingLuo(pName);
@@ -19,7 +20,7 @@ const JingLuo = (props) => {
   return <div>
     <HeaderBar title={'十二时辰'} />
     {jingluo?.yuque ?
-      <iframe src={jingluo?.yuque} className="yuque-frame"></iframe> :
+      <iframe src={url} className="yuque-frame"></iframe> :
       null
     }
   </div>

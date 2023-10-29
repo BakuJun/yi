@@ -7,7 +7,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "足少阳胆经",
       "pName": "zsydj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/iy1bto5rmegcbz4e?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/iy1bto5rmegcbz4e"
     }
   },
   "丑": {
@@ -18,7 +18,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "足厥阴肝经",
       "pName": "zjygj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/uqpaylas78vx3txw?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/uqpaylas78vx3txw"
     }
   },
   "寅": {
@@ -29,7 +29,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "手太阴肺经",
       "pName": "styfj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/uggltsgxy7a2wtiy?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/uggltsgxy7a2wtiy"
     }
   },
   "卯": {
@@ -40,7 +40,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "手阳明大肠经",
       "pName": "symdcj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/lg61lmthenz8w125?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/lg61lmthenz8w125"
     }
   },
   "辰": {
@@ -51,7 +51,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "足阳明胃经",
       "pName": "zymwj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/sz9oq5igh34s83cn?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/sz9oq5igh34s83cn"
     }
   },
   "巳": {
@@ -62,7 +62,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "足太阴脾经",
       "pName": "ztypj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/rmgfsnxcg2uxeoy5?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/rmgfsnxcg2uxeoy5"
     }
   },
   "午": {
@@ -72,7 +72,8 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "action": "饭后站桩小憩养心",
     "jingluo": {
       "name": "手少阴心经",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/xnbm2dv0v7zgoc7n?singleDoc"
+      "pName": "ssyxj",
+      "yuque": "https://www.yuque.com/yishun/umgqgv/xnbm2dv0v7zgoc7n"
     }
   },
   "未": {
@@ -83,7 +84,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "手太阳小肠经",
       "pName": "styxcj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/my3p6xky8xm78l70?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/my3p6xky8xm78l70"
     }
   },
   "申": {
@@ -94,7 +95,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "足太阳膀胱经",
       "pName": "ztypgj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/asmti3p99snd3nfe?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/asmti3p99snd3nfe"
     }
   },
   "酉": {
@@ -105,7 +106,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "足少阴肾经",
       "pName": "zsysj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/mnucyb76b5o9qz81?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/mnucyb76b5o9qz81"
     }
   },
   "戌": {
@@ -116,7 +117,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "手厥阴心包经",
       "pName": "sjyxbj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/ezwc2fznaexlv3dy?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/ezwc2fznaexlv3dy"
     }
   },
   "亥": {
@@ -127,7 +128,7 @@ export const SHI_CHEN_ORIGIN_DATA = {
     "jingluo": {
       "name": "手少阳三焦经",
       "pName": "shysjj",
-      "yuque": "https://www.yuque.com/yishun/umgqgv/wcmieyzippm6e6ve?singleDoc"
+      "yuque": "https://www.yuque.com/yishun/umgqgv/wcmieyzippm6e6ve"
     }
   }
 }

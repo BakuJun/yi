@@ -153,7 +153,8 @@ const jieQiData = [
       }
     ],
     "pinyin": "xiaoman",
-    "imgUrl": "https://www.ourfreesky.org/static/jieqi/08_xiaoman.jpg"
+    "imgUrl": "https://www.ourfreesky.org/static/jieqi/08_xiaoman.jpg",
+    "opacity": 0.4
   },
   {
     "name": "芒种",
@@ -172,7 +173,8 @@ const jieQiData = [
       }
     ],
     "pinyin": "mangzhong",
-    "imgUrl": "https://www.ourfreesky.org/static/jieqi/09_mangzhong.jpg"
+    "imgUrl": "https://www.ourfreesky.org/static/jieqi/09_mangzhong.jpg",
+    "opacity": 0.4
   },
   {
     "name": "夏至",
@@ -343,7 +345,8 @@ const jieQiData = [
       }
     ],
     "pinyin": "shuangjiang",
-    "imgUrl": "https://www.ourfreesky.org/static/jieqi/18_shuangjiang.jpg"
+    "imgUrl": "https://www.ourfreesky.org/static/jieqi/18_shuangjiang.jpg",
+    "opacity": 0.4
   },
   {
     "name": "立冬",
@@ -438,7 +441,8 @@ const jieQiData = [
       }
     ],
     "pinyin": "xiaohan",
-    "imgUrl": "https://www.ourfreesky.org/static/jieqi/23_xiaohan.jpg"
+    "imgUrl": "https://www.ourfreesky.org/static/jieqi/23_xiaohan.jpg",
+    "opacity": 0.4
   },
   {
     "name": "大寒",

@@ -24,11 +24,11 @@ const Clock = useInject(['clock'])(props => {
   }, []);
 
   const { currentShichen, time } = clock;
-  const { imgUrl, currentHou } = clock.jieqiObj();
+  const { imgUrl, currentHou, opacity } = clock.jieqiObj();
 
   return <div className='page-wrap flex-center'>
     <div className='clock-wrap'>
-      <img src={imgUrl} className='bg-img' />
+      <img src={imgUrl} className='bg-img' style={{ opacity: opacity || 0.6 }} />
       <canvas width={700} height={700} className='clock' id="shi-chen-clock"></canvas>
     </div>
     <div className='page-title flex-center'>

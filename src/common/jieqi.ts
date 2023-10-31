@@ -512,18 +512,20 @@ export default {
     const currentSolar = this.getCurrentJieQi().getSolar();
     const nextSolar = this.lunar.getNextJieQi().getSolar();
     const curSolarDayjs = formatSolarToDayJs(currentSolar);
-    // 计算下一个节气前减1天
-    const nextSolarDayjs = formatSolarToDayJs(nextSolar).subtract(1, 'days');
+    // 节气结束前1s
+    const nextSolarDayjs = formatSolarToDayJs(nextSolar).subtract(1, 'seconds');
     const ds = nextSolarDayjs.diff(curSolarDayjs, 'seconds');
-    const perHouSeconds = ds / 3; // 通过两节气时差算出三候间间隔
+    const totalDays = Math.round(ds / 24 / 3600);
+    const perHouDays = Math.round(totalDays / 3); // 通过两节气时差算出三候间间隔天数
     const nowDayjs = dayjs(new Date());
-    const currentHouIndex = Math.ceil(nowDayjs.diff(curSolarDayjs, 'seconds') / perHouSeconds);
+    const currentHouIndex = Math.ceil(nowDayjs.diff(curSolarDayjs, 'days') / perHouDays);
 
-    const houStartDayjs = curSolarDayjs.add((currentHouIndex - 1) * perHouSeconds, 'seconds');
-    const houEndDayjs = curSolarDayjs.add(currentHouIndex * perHouSeconds, 'seconds');
+    const houStartDayjs = curSolarDayjs.add((currentHouIndex - 1) * perHouDays, 'days');
+    // 节气三候第一天是开始，已包含第一天，所以结束时天数改-1
+    const houEndDayjs = curSolarDayjs.add(currentHouIndex * perHouDays - 1, 'days');
 
     jqObj.currentHou = {
-      ...jqObj['sanhou'][currentHouIndex],
+      ...jqObj['sanhou'][currentHouIndex - 1],
       start: `${houStartDayjs.month() + 1}/${houStartDayjs.date()}`,
       end: `${houEndDayjs.month() + 1}/${houEndDayjs.date()}`,
       name: currentHouIndex === 1 ? '一候' : (currentHouIndex === 2 ? '二候' : '三候')

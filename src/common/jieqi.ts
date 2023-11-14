@@ -484,7 +484,7 @@ export default {
   getCurrentJieQiObj() {
     const calcEnd = (new Date()).getTime()
     //优化计算逻辑,30秒算一次节气就好，不然太过密集了，停留时间长的情况下可能有偏差
-    if (this.calcStart === 0 || (this.calcStart > 0 && calcEnd - this.calcStart > 30000)) {
+    if (this.calcStart === 0 || (this.calcStart > 0 && calcEnd - this.calcStart > 60000)) {
       const jq = this.getCurrentJieQi();
       const jqObj = this.getJieQiByName(jq.getName())
       const start = jq.getSolar()
@@ -521,9 +521,7 @@ export default {
     return nextSolar;
   },
   /**
-   * 
    * @description
-   * 三候的计算其实是根据太阳视黄经的角度计算的，所以其实具体的分割不是按天维度，而是某一时刻。
    * 比如参考下面这个表
    * https://interesting-sky.china-vo.org/2023-solar-term/
    */
@@ -531,31 +529,30 @@ export default {
     const currentSolar = this.getCurrentJieQi().getSolar();
     const nextSolar = this._getNextSolar(currentSolar);
     const curSolarDayjs = formatSolarToDayJs(currentSolar);
-    // 节气结束前1s
-    const nextSolarDayjs = formatSolarToDayJs(nextSolar).subtract(1, 'seconds');
-    const ds = nextSolarDayjs.diff(curSolarDayjs, 'seconds');
-    const perHouSeconds = Math.round(ds / 3); // 通过两节气时差算出三候间间隔秒数
-    // const perHouSeconds = 5 * 24 * 3600; // 通过两节气时差算出三候间间隔秒数
-    const nowDayjs = dayjs(new Date());
-    // 避免节气出现 currentHouIndex 为 0 的情况
-    const currentHouIndex = Math.max(Math.ceil(nowDayjs.diff(curSolarDayjs, 'second') / perHouSeconds), 1);
+    const nextSolarDayjs = formatSolarToDayJs(nextSolar);
+    const totalDays = nextSolarDayjs.diff(curSolarDayjs, 'days');
+    const now = dayjs(new Date());
+    const houDays = [[], [], []];
+    let currentHouIndex = 0;
+    for (let i = 0; i <= totalDays; i++) {
+      let arrayIndex = Math.min(Math.floor(i / 5), 2);
+      let tempDayjs = curSolarDayjs.add(i, 'day');
+      if ((tempDayjs.month() !== nextSolarDayjs.month() || tempDayjs.date() !== nextSolarDayjs.date())) {
+        houDays[arrayIndex].push(`${tempDayjs.month() + 1}/${tempDayjs.date()}`)
+      }
 
-    const houStartDayjs = curSolarDayjs.add((currentHouIndex - 1) * perHouSeconds, 'seconds');
-    // 节气三候第一天是开始，已包含第一天，所以结束时天数该-1
-    let houEndDayjs = curSolarDayjs.add(currentHouIndex * perHouSeconds - 1, 'seconds');
-
-    // 如果结束的节气日期是下一个节气的结束日期，这里三候最后一后减一天,避免极端情况出现
-    if (currentHouIndex === 3 &&
-      (houEndDayjs.date() === nextSolarDayjs.date() || houEndDayjs.date() - 1 === nextSolarDayjs.date())
-    ) {
-      houEndDayjs = houEndDayjs.subtract(1, 'days');
+      if (now.month() === tempDayjs.month() && now.date() === tempDayjs.date()) {
+        currentHouIndex = Math.min(Math.floor((i + 1) / (totalDays / 3)), 2);
+      }
     }
 
+    let tempArray = houDays[currentHouIndex];
+
     jqObj.currentHou = {
-      ...jqObj['sanhou'][currentHouIndex - 1],
-      start: `${houStartDayjs.month() + 1}/${houStartDayjs.date()}`,
-      end: `${houEndDayjs.month() + 1}/${houEndDayjs.date()}`,
-      name: currentHouIndex === 1 ? '一候' : (currentHouIndex === 2 ? '二候' : '三候')
+      ...jqObj['sanhou'][currentHouIndex],
+      start: tempArray[0],
+      end: tempArray[tempArray.length - 1],
+      name: currentHouIndex === 0 ? '一候' : (currentHouIndex === 1 ? '二候' : '三候')
     };
   }
 }

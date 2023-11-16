@@ -107,6 +107,15 @@
   }
 }
 
+.page-footer {
+  margin: 16px 0;
+
+  .icp {
+    font-size: 14px;
+    color: #585a5a;
+  }
+}
+
 @media screen and (min-height: 700px) {
   .page-wrap {
     /* 微信跳转后body height会发生变化，底部多了一个bar，所以动态调整高度  */

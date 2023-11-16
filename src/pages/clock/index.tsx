@@ -58,6 +58,9 @@ const Clock = useInject(['clock'])(props => {
         <div className='flex-center'> {time} </div>
       </div>
     </div>
+    <div className='page-footer'>
+      <a className='icp' href="https://beian.miit.gov.cn/" target="_blank">浙ICP备2023039790号-1</a>
+    </div>
   </div>
 })
 

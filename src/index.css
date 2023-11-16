@@ -8,3 +8,12 @@
 .app{
   
 }
+
+.page-footer{
+  display: flex;
+}
+
+.icp{
+  color: #585a5a;
+  font-size: 10px;
+}

@@ -542,7 +542,7 @@ export default {
       }
 
       if (now.month() === tempDayjs.month() && now.date() === tempDayjs.date()) {
-        currentHouIndex = Math.min(Math.floor((i + 1) / (totalDays / 3)), 2);
+        currentHouIndex = arrayIndex;
       }
     }
 

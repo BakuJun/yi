@@ -41,10 +41,29 @@ class Clock {
 
   drawClockFace() {
     const { context, centerX, centerY, radius } = this;
+    const g1 = context.createLinearGradient(centerX, centerY - radius, centerX, centerY + radius);
+
+    // 渐变色从#FCFF00开始到#FA742B结束
+    g1.addColorStop(0, '#C2FFD8');
+    g1.addColorStop(1, '#5151E5');
+
+    // 绘制0度到180度的圆弧
     context.beginPath();
-    context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-    context.strokeStyle = 'black';
-    context.lineWidth = 4;
+    context.arc(centerX, centerY, radius, -105 / 180 * Math.PI, 75 / 180 * Math.PI);
+    context.strokeStyle = g1;
+    context.lineWidth = 6;
+    context.stroke();
+
+    const g2 = context.createLinearGradient(centerX, centerY - radius, centerX, centerY + radius);
+
+    // 渐变色从#C2FFD8开始到#5151E5结束
+    g2.addColorStop(0, '#FA742B');
+    g2.addColorStop(1, '#FCFF00');
+
+    // 绘制180度到360度的圆弧
+    context.beginPath();
+    context.arc(centerX, centerY, radius, 75 / 180 * Math.PI, 255 / 180 * Math.PI);
+    context.strokeStyle = g2;
     context.stroke();
   }
 
@@ -52,7 +71,7 @@ class Clock {
     const { context, centerX, centerY, radius } = this;
 
     for (let i = 0; i < 24; i++) {
-      const angle = (2 * Math.PI * i) / 24;
+      const angle = (2 * Math.PI * (i + 12)) / 24;
       const x1 = centerX + radius * Math.cos(angle - Math.PI / 2);
       const y1 = centerY + radius * Math.sin(angle - Math.PI / 2);
       const x2 = centerX + (radius + 30) * Math.cos(angle - Math.PI / 2);
@@ -81,7 +100,7 @@ class Clock {
     const { context, centerX, centerY, radius } = this;
 
     for (let i = 0; i < 12; i++) {
-      const angle = (2 * Math.PI * i) / 12;
+      const angle = (2 * Math.PI * (i + 6)) / 12;
       const x = centerX + (radius - 32) * Math.cos(angle - Math.PI / 2);
       const y = centerY + (radius - 32) * Math.sin(angle - Math.PI / 2);
       context.font = 'bolder 36px Arial';
@@ -103,7 +122,7 @@ class Clock {
     this.drawClockHand(
       centerX,
       centerY,
-      (2 * Math.PI * (hours + minutes / 60)) / 24,
+      (2 * Math.PI * ((hours + 12) + minutes / 60)) / 24,
       radius * 0.5,
       'black',
       8
@@ -112,7 +131,7 @@ class Clock {
     this.drawClockHand(
       centerX,
       centerY,
-      (2 * Math.PI * (minutes + seconds / 60)) / 60,
+      (2 * Math.PI * ((minutes + 30) + seconds / 60)) / 60,
       radius * 0.7,
       'black',
       6
@@ -121,7 +140,7 @@ class Clock {
     this.drawClockHand(
       centerX,
       centerY,
-      (2 * Math.PI * seconds) / 60,
+      (2 * Math.PI * (seconds + 30)) / 60,
       radius * 0.8,
       'black',
       2
@@ -163,10 +182,6 @@ class Clock {
 
     this.currentShichen = earthlyBranches[currentEarthlyBranchIndex];
     this.time = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-    // 更新页面中的时间和地支显示
-    // document.getElementById('currentTime').textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    // document.getElementById('earthlyBranch').textContent = `属${currentEarthlyBranch}时`;
   }
 
   @computed
@@ -193,3 +208,4 @@ class Clock {
 }
 
 export default new Clock();
+

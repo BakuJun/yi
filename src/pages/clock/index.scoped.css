@@ -18,7 +18,7 @@
     border-bottom: 1px solid #ccc;
     padding: 0 20px;
 
-    & label{
+    & label {
       margin-right: 10px;
     }
   }
@@ -114,7 +114,14 @@
   }
 }
 
-.hl{
+.hl {
   font-weight: 700;
-  color: #333!important;
+  color: #333 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .page-wrap{
+    transform: scale(0.3);
+    transform-origin: top;
+  }
 }

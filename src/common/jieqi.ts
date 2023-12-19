@@ -379,7 +379,7 @@ const jieQiData = [
         "zhizhoujianyan": "天气上升阳敛藏  地气下降阴归藏"
       },
       {
-        "title": "三侯 闭塞而成冬",
+        "title": "闭塞而成冬",
         "zhizhoujianyan": "天地不交则不通  闭塞成冬缘不通"
       }
     ],
@@ -483,7 +483,7 @@ export default {
   },
   getCurrentJieQiObj() {
     const calcEnd = (new Date()).getTime()
-    //优化计算逻辑,30秒算一次节气就好，不然太过密集了，停留时间长的情况下可能有偏差
+    //优化计算逻辑,60秒算一次节气就好，不然太过密集了，停留时间长的情况下可能有偏差
     if (this.calcStart === 0 || (this.calcStart > 0 && calcEnd - this.calcStart > 60000)) {
       const jq = this.getCurrentJieQi();
       const jqObj = this.getJieQiByName(jq.getName())

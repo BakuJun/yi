@@ -1,4 +1,5 @@
 
+
 import { SHI_CHEN } from '@/common/constants';
 import jieqi from '@/common/jieqi';
 import { action, observable, makeAutoObservable, computed } from 'mobx';
@@ -18,7 +19,6 @@ class Clock {
 
   constructor() {
     makeAutoObservable(this);
-    // jieqi.initLunar();
   }
 
   drawClock(canvas?: any) {
@@ -43,7 +43,6 @@ class Clock {
     const { context, centerX, centerY, radius } = this;
     const g1 = context.createLinearGradient(centerX, centerY - radius, centerX, centerY + radius);
 
-    // 渐变色从#FCFF00开始到#FA742B结束
     g1.addColorStop(0, '#C2FFD8');
     g1.addColorStop(1, '#5151E5');
 
@@ -55,8 +54,6 @@ class Clock {
     context.stroke();
 
     const g2 = context.createLinearGradient(centerX, centerY - radius, centerX, centerY + radius);
-
-    // 渐变色从#C2FFD8开始到#5151E5结束
     g2.addColorStop(0, '#FA742B');
     g2.addColorStop(1, '#FCFF00');
 
@@ -85,11 +82,20 @@ class Clock {
 
       context.beginPath();
       if (i % 2 == 0) {
-        context.arc(x1, y1, 4, 0, 4 * Math.PI)
         context.fillStyle = '#484848'; // 
+        context.arc(x1, y1, 4, 0, 4 * Math.PI)
       } else {
-        context.arc(x1, y1, 8, 0, 8 * Math.PI)
-        context.fillStyle = '#F75D59'; // 
+        const lineLength = 18;
+        const lineWidth = 4;
+        const endX = centerX + (radius - lineLength) * Math.cos(angle - Math.PI / 2);
+        const endY = centerY + (radius - lineLength) * Math.sin(angle - Math.PI / 2);
+
+        context.beginPath();
+        context.moveTo(x1, y1);
+        context.lineTo(endX, endY);
+        context.lineWidth = lineWidth;
+        context.strokeStyle = '#484848';
+        context.stroke();
       }
 
       context.fill();

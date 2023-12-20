@@ -17,3 +17,10 @@
   color: #585a5a;
   font-size: 10px;
 }
+
+@media screen and (min-width: 750px) {
+  #root{
+    transform: scale(0.28);
+    transform-origin: top;
+  }
+}

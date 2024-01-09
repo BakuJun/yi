@@ -107,7 +107,7 @@
   }
 }
 
-@media screen and (min-height: 700px) {
+@media screen and (min-height: 700px) and (max-width: 900px){
   .page-wrap {
     /* 微信跳转后body height会发生变化，底部多了一个bar，所以动态调整高度  */
     margin-top: -40px;

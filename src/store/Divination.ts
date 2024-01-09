@@ -61,25 +61,26 @@ class Divination {
 
   @action
   computeYuanGua() {
-    let shang, xia;
+    let wai, nei;
 
     if (this.type === DIVINATION_TYPES.NUMBERS) {
       if (!this.cn1 || !this.cn2) {
         return
       }
 
-      shang = this.get3YaoGua(this.cn1);
-      xia = this.get3YaoGua(this.cn2)
+      wai = this.get3YaoGua(this.cn1);
+      nei = this.get3YaoGua(this.cn2)
     } else {
 
     }
 
-    if (shang && xia) {
+    if (wai && nei) {
+      // debugger
       // @ts-ignore
       this.yuanGua = {
-        shang,
-        xia,
-        jx: getJX(xia, shang)
+        wai,
+        nei,
+        jx: getJX(nei, wai)
       };
     }
   }
@@ -93,8 +94,8 @@ class Divination {
 
     }
     return {
-      // shang : this.get3YaoGua(this.n1),
-      // xia : this.get3YaoGua(this.n2)
+      // wai : this.get3YaoGua(this.n1),
+      // nei : this.get3YaoGua(this.n2)
     };
   }
 
@@ -118,28 +119,28 @@ class Divination {
       return null;
     }
 
-    const shang = this.get3YaoGua(this.cn1, true)
-    const xia = this.get3YaoGua(this.cn2, true)
+    const wai = this.get3YaoGua(this.cn1, true)
+    const nei = this.get3YaoGua(this.cn2, true)
     const shiChen = this.getShiChen();
     // @ts-ignore
     const bianIndex = ((this.n1 + this.cn2 + shiChen?.value) % 6) || 6;
-    const yao6 = shang.img.concat(xia.img)
+    const yao6 = wai.img.concat(nei.img)
     this.setDongYao(`${bianIndex}`)
     yao6[6 - bianIndex] = !(yao6[6 - bianIndex])
 
     if (bianIndex > 3) {
       let bian = this.get3YaoGuaByImg(yao6.slice(0, 3))
       return {
-        shang: bian,
-        xia,
-        jx: getJX(xia, bian)
+        wai: bian,
+        nei,
+        jx: getJX(nei, bian)
       }
     } else {
       let bian = this.get3YaoGuaByImg(yao6.slice(3))
       return {
-        shang,
-        xia: bian,
-        jx: getJX(bian, shang)
+        wai,
+        nei: bian,
+        jx: getJX(bian, wai)
       }
     }
 
@@ -190,7 +191,12 @@ class Divination {
   }
 }
 
-export default new Divination();
+const divination = new Divination();
+divination.setN1(1);
+divination.setN2(1);
+divination.submit();
+
+export default divination;
 
 // TODO
 // 1. postcss done

@@ -10,23 +10,23 @@ interface P {
 
 const ResultCard = (props: P) => {
   const { title, gua, subtitle } = props;
-  const { shang, xia, jx } = gua;
+  const { wai, nei, jx } = gua;
 
-  if (!shang || !xia) {
+  if (!wai || !nei) {
     return null;
   }
 
   return <div className='result-card'>
     <div className='result-header'>
-      <h3 className='result-title'>{title}{`(${shang.xiang}${xia.xiang})`}</h3>
+      <h3 className='result-title'>{title}{`(${wai.xiang}${nei.xiang})`}</h3>
     </div>
     <div className='result-gua-wrap'>
-      <div className='shang gua-wrap flex-center'>
+      <div className='wai gua-wrap flex-center'>
         <div className='gua'>
-          上卦({shang.name},{shang.nature})
+          上卦({wai.name}为{wai.xiang})
         </div>
         <div className='img'>
-          {shang.img.map((v: any, i: number) =>
+          {wai.img.map((v: any, i: number) =>
             <Yao status={v} key={i} />
           )}
         </div>
@@ -34,12 +34,12 @@ const ResultCard = (props: P) => {
           用
         </div>
       </div>
-      <div className='xia gua-wrap flex-center'>
+      <div className='nei gua-wrap flex-center'>
         <div className='gua'>
-          下卦({xia.name},{xia.nature})
+          下卦({nei.name}为{nei.xiang})
         </div>
         <div className='img'>
-          {xia.img.map((v:any, i:number) =>
+          {nei.img.map((v:any, i:number) =>
             <Yao status={v} key={i} />
           )}
         </div>

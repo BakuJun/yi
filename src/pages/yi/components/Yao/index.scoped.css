@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.yao-hl {
+  background-color: #f00;
+}
+
 .yin {
   background-color: #fff;
   position: absolute;

@@ -1,13 +1,14 @@
 import './index.scoped.css';
 
 interface P {
-  status: boolean
+  status: boolean,
+  hl?: boolean,
 }
 
 const Yao = (props: P) => {
   const status = props.status;
 
-  return <div className='yao-wrap'>
+  return <div className={`${props.hl ? 'yao-hl' : ''} yao-wrap`}>
     {status ? null : <div className='yin'></div>}
   </div>
 }

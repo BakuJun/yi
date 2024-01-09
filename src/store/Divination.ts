@@ -3,6 +3,7 @@ import { DIVINATION_TYPES, GUA_8, SHI_CHEN } from '@/common/constants';
 import { action, observable, makeAutoObservable, computed } from 'mobx';
 import Message from '@/pages/yi/components/Message';
 import { getJX } from '@/pages/yi/common/utils';
+import gua64 from '@/common/gua64';
 
 
 class Divination {
@@ -61,26 +62,26 @@ class Divination {
 
   @action
   computeYuanGua() {
-    let wai, nei;
+    let nei, wai;
 
     if (this.type === DIVINATION_TYPES.NUMBERS) {
       if (!this.cn1 || !this.cn2) {
         return
       }
 
-      wai = this.get3YaoGua(this.cn1);
-      nei = this.get3YaoGua(this.cn2)
+      nei = this.get3YaoGua(this.cn1);
+      wai = this.get3YaoGua(this.cn2)
     } else {
 
     }
 
-    if (wai && nei) {
-      // debugger
+    if (nei && wai) {
       // @ts-ignore
       this.yuanGua = {
-        wai,
         nei,
-        jx: getJX(nei, wai)
+        wai,
+        jx: getJX(wai, nei),
+        yao6: gua64.getGua64ByNeiWai(nei, wai)
       };
     }
   }
@@ -94,8 +95,8 @@ class Divination {
 
     }
     return {
-      // wai : this.get3YaoGua(this.n1),
-      // nei : this.get3YaoGua(this.n2)
+      // nei : this.get3YaoGua(this.n1),
+      // wai : this.get3YaoGua(this.n2)
     };
   }
 
@@ -119,28 +120,30 @@ class Divination {
       return null;
     }
 
-    const wai = this.get3YaoGua(this.cn1, true)
-    const nei = this.get3YaoGua(this.cn2, true)
+    const nei = this.get3YaoGua(this.cn1, true)
+    const wai = this.get3YaoGua(this.cn2, true)
     const shiChen = this.getShiChen();
     // @ts-ignore
     const bianIndex = ((this.n1 + this.cn2 + shiChen?.value) % 6) || 6;
-    const yao6 = wai.img.concat(nei.img)
+    const yao6 = nei.img.concat(wai.img)
     this.setDongYao(`${bianIndex}`)
     yao6[6 - bianIndex] = !(yao6[6 - bianIndex])
 
     if (bianIndex > 3) {
       let bian = this.get3YaoGuaByImg(yao6.slice(0, 3))
       return {
-        wai: bian,
-        nei,
-        jx: getJX(nei, bian)
+        nei: bian,
+        wai,
+        jx: getJX(wai, bian),
+        yao6: gua64.getGua64ByNeiWai(wai, bian)
       }
     } else {
       let bian = this.get3YaoGuaByImg(yao6.slice(3))
       return {
-        wai,
-        nei: bian,
-        jx: getJX(bian, wai)
+        nei,
+        wai: bian,
+        jx: getJX(bian, nei),
+        yao6: gua64.getGua64ByNeiWai(bian, nei)
       }
     }
 
@@ -192,8 +195,8 @@ class Divination {
 }
 
 const divination = new Divination();
-divination.setN1(1);
-divination.setN2(1);
+divination.setN1(4);
+divination.setN2(5);
 divination.submit();
 
 export default divination;

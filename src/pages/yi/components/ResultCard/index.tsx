@@ -20,11 +20,12 @@ interface P {
   title: string;
   subtitle: string;
   gua: any;
-  dongyao?: string
+  dongyao: string;
+  showDongyao: boolean;
 }
 
 const ResultCard = (props: P) => {
-  const { title, gua, subtitle, dongyao } = props;
+  const { title, gua, subtitle, dongyao, showDongyao } = props;
   const { wai, nei, jx, yao6 } = gua;
 
   if (!wai || !nei) {
@@ -32,6 +33,7 @@ const ResultCard = (props: P) => {
   }
 
   const dongyaoNum = Number(dongyao) || 0;
+  const dongyaoItem = showDongyao ? yao6.yaociArray[dongyaoNum - 1] : null
 
   return <div className='result-card'>
     <div className='result-header'>
@@ -44,7 +46,7 @@ const ResultCard = (props: P) => {
         </div>
         <div className='img'>
           {wai.img.map((v: any, i: number) =>
-            <Yao status={v} key={i} hl={dongyaoNum === i + 1} />
+            <Yao status={v} key={i} hl={dongyaoNum === 6 - i} />
           )}
         </div>
         <div className='ming'>
@@ -57,7 +59,7 @@ const ResultCard = (props: P) => {
         </div>
         <div className='img'>
           {nei.img.map((v: any, i: number) =>
-            <Yao status={v} key={i} hl={dongyaoNum === i + 4} />
+            <Yao status={v} key={i} hl={dongyaoNum === 3 - i} />
           )}
         </div>
         <div className='ming'>
@@ -72,9 +74,16 @@ const ResultCard = (props: P) => {
       <DeitalItem title="象" content={
         <a href={yao6.url} target='_blank'>{yao6.xiangyue}</a>
       } />
-      <DeitalItem title="动爻" content={
-        <a href={yao6.url} target='_blank'>{yao6.xiangyue}</a>
-      } />
+      {dongyaoItem ?
+        <DeitalItem title="动爻辞" content={
+          <a href={yao6.url} target='_blank'>{dongyaoItem.text}</a>
+        } /> : null
+      }
+      {dongyaoItem ?
+        <DeitalItem title="动爻象" content={
+          <a href={yao6.url} target='_blank'>{dongyaoItem.xiangyue}</a>
+        } /> : null
+      }
       <DeitalItem title={subtitle} content={
         <span style={{ color: jx.color }}>{jx.title}({jx.desc})</span>}
       />

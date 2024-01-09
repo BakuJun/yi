@@ -40,8 +40,8 @@ h3 span {
 .result-detail-wrap {
   border-radius: 4px;
   margin: 10px auto;
-  padding: 10px;
-  width: 365px;
+  padding: 6px;
+  width: 370px;
 }
 
 .detail-wrap {
@@ -62,21 +62,11 @@ h3 span {
 }
 
 .detail-content {
-  width: 270px;
+  width: 280px;
   min-height: 60px;
 
   & a {
     color: currentColor;
     text-decoration: underline;
   }
-}
-
-.result-jx-wrap {
-  padding: 10px 20px;
-  text-align: left;
-}
-
-.jx-title {
-  font-size: 16px;
-  font-weight: 600;
 }

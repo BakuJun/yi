@@ -62,25 +62,25 @@ class Divination {
 
   @action
   computeYuanGua() {
-    let nei, wai;
+    let wai, nei;
 
     if (this.type === DIVINATION_TYPES.NUMBERS) {
       if (!this.cn1 || !this.cn2) {
         return
       }
 
-      nei = this.get3YaoGua(this.cn1);
-      wai = this.get3YaoGua(this.cn2)
+      wai = this.get3YaoGua(this.cn1);
+      nei = this.get3YaoGua(this.cn2)
     } else {
 
     }
 
-    if (nei && wai) {
+    if (wai && nei) {
       // @ts-ignore
       this.yuanGua = {
-        nei,
         wai,
-        jx: getJX(wai, nei),
+        nei,
+        jx: getJX(nei, wai),
         yao6: gua64.getGua64ByNeiWai(nei, wai)
       };
     }
@@ -95,8 +95,8 @@ class Divination {
 
     }
     return {
-      // nei : this.get3YaoGua(this.n1),
-      // wai : this.get3YaoGua(this.n2)
+      // wai : this.get3YaoGua(this.n1),
+      // nei : this.get3YaoGua(this.n2)
     };
   }
 
@@ -120,30 +120,30 @@ class Divination {
       return null;
     }
 
-    const nei = this.get3YaoGua(this.cn1, true)
-    const wai = this.get3YaoGua(this.cn2, true)
+    const wai = this.get3YaoGua(this.cn1, true)
+    const nei = this.get3YaoGua(this.cn2, true)
     const shiChen = this.getShiChen();
     // @ts-ignore
     const bianIndex = ((this.n1 + this.cn2 + shiChen?.value) % 6) || 6;
-    const yao6 = nei.img.concat(wai.img)
+    const yao6 = wai.img.concat(nei.img)
     this.setDongYao(`${bianIndex}`)
     yao6[6 - bianIndex] = !(yao6[6 - bianIndex])
 
     if (bianIndex > 3) {
       let bian = this.get3YaoGuaByImg(yao6.slice(0, 3))
       return {
-        nei: bian,
-        wai,
-        jx: getJX(wai, bian),
-        yao6: gua64.getGua64ByNeiWai(wai, bian)
+        wai: bian,
+        nei,
+        jx: getJX(nei, bian),
+        yao6: gua64.getGua64ByNeiWai(nei, bian)
       }
     } else {
       let bian = this.get3YaoGuaByImg(yao6.slice(3))
       return {
-        nei,
-        wai: bian,
-        jx: getJX(bian, nei),
-        yao6: gua64.getGua64ByNeiWai(bian, nei)
+        wai,
+        nei: bian,
+        jx: getJX(bian, wai),
+        yao6: gua64.getGua64ByNeiWai(bian, wai)
       }
     }
 
@@ -195,14 +195,8 @@ class Divination {
 }
 
 const divination = new Divination();
-divination.setN1(4);
-divination.setN2(5);
-divination.submit();
 
 export default divination;
 
 // TODO
-// 1. postcss done
-// 2. mobx store done
-// 3. 64卦
 // 4. 日期算法

@@ -64,9 +64,4 @@ h3 span {
 .detail-content {
   width: 280px;
   min-height: 60px;
-
-  & a {
-    color: currentColor;
-    text-decoration: underline;
-  }
 }

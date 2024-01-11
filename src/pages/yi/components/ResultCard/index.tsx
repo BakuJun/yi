@@ -1,6 +1,7 @@
 import './index.scoped.css';
 import React from 'react';
 import Yao from '../Yao';
+import Link from '@mui/material/Link';
 
 interface PD {
   title: string;
@@ -42,7 +43,7 @@ const ResultCard = (props: P) => {
     <div className='result-gua-wrap'>
       <div className='wai gua-wrap flex-center'>
         <div className='gua'>
-          上卦({wai.name}为{wai.xiang})
+          外卦({wai.name}为{wai.xiang})
         </div>
         <div className='img'>
           {wai.img.map((v: any, i: number) =>
@@ -55,7 +56,7 @@ const ResultCard = (props: P) => {
       </div>
       <div className='nei gua-wrap flex-center'>
         <div className='gua'>
-          下卦({nei.name}为{nei.xiang})
+          内卦({nei.name}为{nei.xiang})
         </div>
         <div className='img'>
           {nei.img.map((v: any, i: number) =>
@@ -69,19 +70,19 @@ const ResultCard = (props: P) => {
     </div>
     <div className='result-detail-wrap'>
       <DeitalItem title="卦" content={
-        <a href={yao6.url} target='_blank'>{yao6.yuanwen}</a>
+        <Link href={yao6.url} target='_blank'>{yao6.yuanwen}</Link>
       } />
       <DeitalItem title="象" content={
-        <a href={yao6.url} target='_blank'>{yao6.xiangyue}</a>
+        <Link href={yao6.url} target='_blank'>{yao6.xiangyue}</Link>
       } />
       {dongyaoItem ?
         <DeitalItem title="动爻辞" content={
-          <a href={yao6.url} target='_blank'>{dongyaoItem.text}</a>
+          <Link href={yao6.url} target='_blank'>{dongyaoItem.text}</Link>
         } /> : null
       }
       {dongyaoItem ?
         <DeitalItem title="动爻象" content={
-          <a href={yao6.url} target='_blank'>{dongyaoItem.xiangyue}</a>
+          <Link href={yao6.url} target='_blank'>{dongyaoItem.xiangyue}</Link>
         } /> : null
       }
       <DeitalItem title={subtitle} content={

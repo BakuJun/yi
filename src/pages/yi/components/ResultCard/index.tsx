@@ -21,7 +21,7 @@ interface P {
   subtitle: string;
   gua: any;
   dongyao: string;
-  showDongyao: boolean;
+  showDongyao?: boolean;
 }
 
 const ResultCard = (props: P) => {
